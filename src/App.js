@@ -31,17 +31,22 @@ function App() {
 
 //Delete Task
 
-const deleteTask= (id)=>{
+const deleteTask= (taskid)=>{
 
-setTasks(tasks.filter((task)=>task.id!==id))
+setTasks(tasks.filter((task)=>task.id!==taskid))
+}
+// Toggle Reminder
+
+const toggleReminder = (taskid)=>  {
+
+  setTasks(tasks.map((task)=>task.id===taskid?{...task,reminder:!task.reminder}:task))
 }
 
-
-
+ 
   return (
     <div className="container">
     <Header />
-    {tasks.length>0 ?<Tasks tasks={tasks} onDelete={deleteTask}/>:"No Tasks to view"}
+    {tasks.length>0 ?<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>:"No Tasks to view"}
     </div>
  
   );
